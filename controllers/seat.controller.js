@@ -268,26 +268,180 @@ const filterseatings = async (req, res) => {
         }
       );
     } else if (floor && !zone) {
-      // floor only: group zones only
-      pipeline.push({
-        $group: {
-          _id: '$floor._id',
-          floor: { $first: '$floor.name' },
-          zones: { $addToSet: '$zone.name' }
+            // ส่วนที่ 1: get zone list (สำหรับ select dropdown)
+        const zoneListPipeline = [
+          ...pipeline, // มี lookup zone, floor แล้ว
+          {
+            $group: {
+              _id: '$zone._id',
+              name: { $first: '$zone.name' },
+              floor: { $first: '$floor.name' }
+            }
+          },
+          {
+            $match: { floor: floor }
+          },
+          {
+            $project: {
+              _id: 0,
+              id: '$_id',
+              name: 1
+            }
+          }
+        ];
+
+        // ส่วนที่ 2: get zoneDetails
+        const zoneDetailsPipeline = [
+          ...pipeline, // ใช้ pipeline เดิมต่อ
+          {
+            $match: { 'floor.name': floor }
+          },
+          {
+            $group: {
+              _id: {
+                zoneId: '$zone._id',
+                zoneName: '$zone.name',
+                row: '$row',
+                tableNumber: '$tableNumber'
+              },
+              status: { $first: '$status' },
+              employee: { $first: '$employee' }
+            }
+          },
+          {
+            $group: {
+              _id: {
+                zoneId: '$_id.zoneId',
+                zoneName: '$_id.zoneName',
+                row: '$_id.row'
+              },
+              tables: {
+                $push: {
+                  tableNumber: '$_id.tableNumber',
+                  status: '$status',
+                  employee: {
+                    employeeId: '$employee._id',
+                    firstname: '$employee.firstname',
+                    lastname: '$employee.lastname',
+                    department: '$employee.department',
+                    position: '$employee.position',
+                    phone: '$employee.phone'
+                  }
+                }
+              }
+            }
+          },
+          {
+            $group: {
+              _id: {
+                zoneId: '$_id.zoneId',
+                zoneName: '$_id.zoneName'
+              },
+              rows: {
+                $push: {
+                  name: '$_id.row',
+                  tables: '$tables'
+                }
+              }
+            }
+          },
+          {
+            $project: {
+              _id: 0,
+              id: '$_id.zoneId',
+              name: '$_id.zoneName',
+              rows: 1
+            }
+          }
+        ];
+
+        // รัน 2 pipeline
+        const zones = await seatSchema.aggregate(zoneListPipeline);
+        const data = await seatSchema.aggregate(zoneDetailsPipeline);
+
+        res.json({
+          floor,
+          zones,
+          data
+        });
+
+    } else if (floor && zone && !row && !tableNumber) {
+      // ส่วนที่ 1: ข้อมูล row สำหรับ select dropdown
+      const rowListPipeline = [
+        ...pipeline,
+        {
+          $match: {
+            'floor.name': floor,
+            'zone.name': zone
+          }
+        },
+        {
+          $group: {
+            _id: '$row'
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            name: '$_id'
+          }
         }
-      }, {
-        $project: { _id: 0, floor: 1, zones: 1 }
-      });
-    } else if (floor && zone && !row) {
-      // floor + zone: group rows only
-      pipeline.push({
-        $group: {
-          _id: '$zone._id',
-          zone: { $first: '$zone.name' },
-          rows: { $addToSet: '$row' }
+      ];
+
+      // ส่วนที่ 2: รายละเอียด row และโต๊ะ
+      const rowDetailsPipeline = [
+        ...pipeline,
+        {
+          $match: {
+            'floor.name': floor,
+            'zone.name': zone
+          }
+        },
+        {
+          $group: {
+            _id: {
+              row: '$row',
+              tableNumber: '$tableNumber'
+            },
+            status: { $first: '$status' },
+            employee: { $first: '$employee' }
+          }
+        },
+        {
+          $group: {
+            _id: '$_id.row',
+            tables: {
+              $push: {
+                tableNumber: '$_id.tableNumber',
+                status: '$status',
+                employee: {
+                  employeeId: '$employee._id',
+                  firstname: '$employee.firstname',
+                  lastname: '$employee.lastname',
+                  department: '$employee.department',
+                  position: '$employee.position',
+                  phone: '$employee.phone'
+                }
+              }
+            }
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            name: '$_id',
+            tables: 1
+          }
         }
-      }, {
-        $project: { _id: 0, zone: 1, rows: 1 }
+      ];
+
+      const rows = await seatSchema.aggregate(rowListPipeline);
+      const data = await seatSchema.aggregate(rowDetailsPipeline);
+
+      res.json({
+        zone,
+        rows: rows.map(r => r.name),
+        data
       });
     } else if (floor && zone && row && !tableNumber) {
       // floor + zone + row: group tables
