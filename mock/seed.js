@@ -20,7 +20,10 @@ async function seed() {
 
   // 1. Floor + Zone
   await zoneSchema.create({ _id: 'ZONA', name: 'A', floor_id: 'FL03' });
+  await zoneSchema.create({ _id: 'ZONB', name: 'B', floor_id: 'FL03' });
+  await zoneSchema.create({ _id: 'ZONC', name: 'A', floor_id: 'FL04' });
   await floorSchema.create({ _id: 'FL03', name: '3' });
+  await floorSchema.create({ _id: 'FL04', name: '4' });
 
   // 2. Employee + Attendance
   const employees = [];
@@ -59,6 +62,34 @@ async function seed() {
       employee_id: employees[i]._id
     });
   }
+
+    await employeeSchema.create({
+        _id: 'EMP202511',
+        firstname: 'sleep',
+        lastname: 'indream',
+        department: 'IT',
+        position: 'Developer',
+        phone: '08123456711'
+      });
+
+      await attendanceSchema.create({
+        _id: 'ATT11',
+        employee_id: 'EMP202511',
+        checkIn: new Date('2024-05-29T08:00:00Z'),
+        checkOut: new Date('2024-05-29T17:00:00Z'),
+        status: 'present'
+      });
+
+
+    await seatSchema.create({
+      _id: 'S11',
+      row: '1',
+      tableNumber: '1',
+      status: 'occupied',
+      zone_id: 'ZONB',
+      employee_id: 'EMP202511'
+    });
+  
 
   console.log('✅ Seeding completed.');
   process.exit(0);
