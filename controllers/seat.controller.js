@@ -117,10 +117,10 @@ const seatings = async (req, res) => {
       }
     ]);
 
-    res.json(result);
+    return res.json(result);
 
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching seats', error });
+      return res.status(500).json({ message: 'Error fetching seats', error });
     }
 }
 
@@ -359,7 +359,7 @@ const filterseatings = async (req, res) => {
         const zones = await seatSchema.aggregate(zoneListPipeline);
         const data = await seatSchema.aggregate(zoneDetailsPipeline);
 
-        res.json({
+        return res.json({
           floor,
           zones,
           data
@@ -438,7 +438,7 @@ const filterseatings = async (req, res) => {
       const rows = await seatSchema.aggregate(rowListPipeline);
       const data = await seatSchema.aggregate(rowDetailsPipeline);
 
-      res.json({
+      return res.json({
         zone,
         rows: rows.map(r => r.name),
         data
@@ -476,10 +476,10 @@ const filterseatings = async (req, res) => {
 
     const result = await seatSchema.aggregate(pipeline);
 
-    res.json(result);
+    return res.json(result);
 
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching data', error });
+    return res.status(500).json({ message: 'Error fetching data', error });
   }
 };
 
