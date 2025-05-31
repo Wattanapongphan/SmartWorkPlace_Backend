@@ -366,6 +366,7 @@ const filterseatings = async (req, res) => {
         });
 
     } else if (floor && zone && !row && !tableNumber) {
+      
       // ส่วนที่ 1: ข้อมูล row สำหรับ select dropdown
       const rowListPipeline = [
         ...pipeline,
@@ -443,36 +444,37 @@ const filterseatings = async (req, res) => {
         rows: rows.map(r => r.name),
         data
       });
-    } else if (floor && zone && row && !tableNumber) {
-      // floor + zone + row: group tables
-      pipeline.push({
-        $group: {
-          _id: { zoneId: '$zone._id', row: '$row' },
-          row: { $first: '$row' },
-          tables: { $addToSet: '$tableNumber' }
-        }
-      }, {
-        $project: { _id: 0, row: 1, tables: 1 }
-      });
-    } else if (floor && zone && row && tableNumber) {
-      // floor + zone + row + tableNumber: output employee info
-      pipeline.push({
-        $project: {
-          _id: 0,
-          tableNumber: 1,
-          status: 1,
-          employee: {
-            employeeId: '$employee._id',
-            firstname: '$employee.firstname',
-            lastname: '$employee.lastname',
-            department: '$employee.department',
-            position: '$employee.position',
-            phone: '$employee.phone',
-            // attendance: '$attendance'
-          }
-        }
-      });
     }
+    // } else if (floor && zone && row && !tableNumber) {
+    //   // floor + zone + row: group tables
+    //   pipeline.push({
+    //     $group: {
+    //       _id: { zoneId: '$zone._id', row: '$row' },
+    //       row: { $first: '$row' },
+    //       tables: { $addToSet: '$tableNumber' }
+    //     }
+    //   }, {
+    //     $project: { _id: 0, row: 1, tables: 1 }
+    //   });
+    // } else if (floor && zone && row && tableNumber) {
+    //   // floor + zone + row + tableNumber: output employee info
+    //   pipeline.push({
+    //     $project: {
+    //       _id: 0,
+    //       tableNumber: 1,
+    //       status: 1,
+    //       employee: {
+    //         employeeId: '$employee._id',
+    //         firstname: '$employee.firstname',
+    //         lastname: '$employee.lastname',
+    //         department: '$employee.department',
+    //         position: '$employee.position',
+    //         phone: '$employee.phone',
+    //         // attendance: '$attendance'
+    //       }
+    //     }
+    //   });
+    // }
 
     const result = await seatSchema.aggregate(pipeline);
 
