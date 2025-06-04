@@ -1,0 +1,750 @@
+[{
+  "_id": "EMP1",
+  "firstname": "User1",
+  "lastname": "Lastname1",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345601",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.372Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.372Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP2",
+  "firstname": "User2",
+  "lastname": "Lastname2",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345602",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.379Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.379Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP3",
+  "firstname": "User3",
+  "lastname": "Lastname3",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345603",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.384Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.384Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP4",
+  "firstname": "User4",
+  "lastname": "Lastname4",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345604",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.390Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.390Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP5",
+  "firstname": "User5",
+  "lastname": "Lastname5",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345605",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.395Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.395Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP6",
+  "firstname": "User6",
+  "lastname": "Lastname6",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345606",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.400Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.400Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP7",
+  "firstname": "User7",
+  "lastname": "Lastname7",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345607",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.404Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.404Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP8",
+  "firstname": "User8",
+  "lastname": "Lastname8",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345608",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.409Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.409Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP9",
+  "firstname": "User9",
+  "lastname": "Lastname9",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345609",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.414Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.414Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP10",
+  "firstname": "User10",
+  "lastname": "Lastname10",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345610",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.418Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.418Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP11",
+  "firstname": "User11",
+  "lastname": "Lastname11",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345611",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.425Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.425Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP12",
+  "firstname": "User12",
+  "lastname": "Lastname12",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345612",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.429Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.429Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP13",
+  "firstname": "User13",
+  "lastname": "Lastname13",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345613",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.432Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.432Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP14",
+  "firstname": "User14",
+  "lastname": "Lastname14",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345614",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.436Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.436Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP15",
+  "firstname": "User15",
+  "lastname": "Lastname15",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345615",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.441Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.441Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP16",
+  "firstname": "User16",
+  "lastname": "Lastname16",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345616",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.444Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.444Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP17",
+  "firstname": "User17",
+  "lastname": "Lastname17",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345617",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.448Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.448Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP18",
+  "firstname": "User18",
+  "lastname": "Lastname18",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345618",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.451Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.451Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP19",
+  "firstname": "User19",
+  "lastname": "Lastname19",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345619",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.454Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.454Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP20",
+  "firstname": "User20",
+  "lastname": "Lastname20",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345620",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.457Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.457Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP21",
+  "firstname": "User21",
+  "lastname": "Lastname21",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345621",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.462Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.462Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP22",
+  "firstname": "User22",
+  "lastname": "Lastname22",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345622",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.465Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.465Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP23",
+  "firstname": "User23",
+  "lastname": "Lastname23",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345623",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.468Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.468Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP24",
+  "firstname": "User24",
+  "lastname": "Lastname24",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345624",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.472Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.472Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP25",
+  "firstname": "User25",
+  "lastname": "Lastname25",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345625",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.475Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.475Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP26",
+  "firstname": "User26",
+  "lastname": "Lastname26",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345626",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.478Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.478Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP27",
+  "firstname": "User27",
+  "lastname": "Lastname27",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345627",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.482Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.482Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP28",
+  "firstname": "User28",
+  "lastname": "Lastname28",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345628",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.486Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.486Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP29",
+  "firstname": "User29",
+  "lastname": "Lastname29",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345629",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.490Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.490Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP30",
+  "firstname": "User30",
+  "lastname": "Lastname30",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345630",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.494Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.494Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP31",
+  "firstname": "User31",
+  "lastname": "Lastname31",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345631",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.498Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.498Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP32",
+  "firstname": "User32",
+  "lastname": "Lastname32",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345632",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.502Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.502Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP33",
+  "firstname": "User33",
+  "lastname": "Lastname33",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345633",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.506Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.506Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP34",
+  "firstname": "User34",
+  "lastname": "Lastname34",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345634",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.509Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.509Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP35",
+  "firstname": "User35",
+  "lastname": "Lastname35",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345635",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.514Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.514Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP36",
+  "firstname": "User36",
+  "lastname": "Lastname36",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345636",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.518Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.518Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP37",
+  "firstname": "User37",
+  "lastname": "Lastname37",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345637",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.522Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.522Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP38",
+  "firstname": "User38",
+  "lastname": "Lastname38",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345638",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.525Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.525Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP39",
+  "firstname": "User39",
+  "lastname": "Lastname39",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345639",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.530Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.530Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP40",
+  "firstname": "User40",
+  "lastname": "Lastname40",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345640",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.534Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.534Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP41",
+  "firstname": "User41",
+  "lastname": "Lastname41",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345641",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.539Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.539Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP42",
+  "firstname": "User42",
+  "lastname": "Lastname42",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345642",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.543Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.543Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP43",
+  "firstname": "User43",
+  "lastname": "Lastname43",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345643",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.549Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.549Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP44",
+  "firstname": "User44",
+  "lastname": "Lastname44",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345644",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.552Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.552Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP45",
+  "firstname": "User45",
+  "lastname": "Lastname45",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345645",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.556Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.556Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP46",
+  "firstname": "User46",
+  "lastname": "Lastname46",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345646",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.560Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.560Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP47",
+  "firstname": "User47",
+  "lastname": "Lastname47",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345647",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.563Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.563Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP48",
+  "firstname": "User48",
+  "lastname": "Lastname48",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345648",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.567Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.567Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP49",
+  "firstname": "User49",
+  "lastname": "Lastname49",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345649",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.571Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.571Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "EMP50",
+  "firstname": "User50",
+  "lastname": "Lastname50",
+  "department": "IT",
+  "position": "Developer",
+  "phone": "0812345650",
+  "createdAt": {
+    "$date": "2025-06-04T02:37:47.574Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T02:37:47.574Z"
+  },
+  "__v": 0
+}]
