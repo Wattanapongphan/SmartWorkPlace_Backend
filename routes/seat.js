@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { seatings, filterseatings } = require('../controllers/seat.controller');
+const { getseatings, filter} = require('../controllers/seat.controller');
 
-router.get('/seatings', seatings);
-router.get('/filter', filterseatings);
+router.get('/', getseatings);
+router.get('/filter', filter);
 
 module.exports = router;
