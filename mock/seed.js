@@ -19,18 +19,18 @@ async function seed() {
   await attendanceSchema.deleteMany();
 
   // 1. Floor + Zone
-  await zoneSchema.create({ _id: 'ZONA', name: 'A', floor_id: 'FL03' });
-  await zoneSchema.create({ _id: 'ZONB', name: 'B', floor_id: 'FL03' });
-  await zoneSchema.create({ _id: 'ZONC', name: 'A', floor_id: 'FL04' });
-  await floorSchema.create({ _id: 'FL03', name: '3' });
-  await floorSchema.create({ _id: 'FL04', name: '4' });
+  await floorSchema.create({ _id: '1', name: 'Flo3' });
+  await floorSchema.create({ _id: '2', name: 'Flo4' });
+  await zoneSchema.create({ _id: '1', name: 'ZonA', floor_id: '1' });
+  await zoneSchema.create({ _id: '2', name: 'ZonB', floor_id: '1' });
+  await zoneSchema.create({ _id: '3', name: 'ZonA', floor_id: '2' });
 
   // 2. Employee + Attendance
   const employees = [];
   const attendance = [];
 
-  for (let i = 1; i <= 10; i++) {
-    const empId = `EMP20250${i.toString().padStart(2, '0')}`;
+  for (let i = 1; i <= 50; i++) {
+    const empId = `EMP${i}`;
     const emp = await employeeSchema.create({
       _id: empId,
       firstname: `User${i}`,
@@ -43,53 +43,37 @@ async function seed() {
     employees.push(emp);
 
     attendance.push(await attendanceSchema.create({
-      _id: `ATT${i}`,
+      _id: `Att${i}`,
       employee_id: empId,
-      checkIn: new Date('2024-05-29T08:00:00Z'),
-      checkOut: new Date('2024-05-29T17:00:00Z'),
+      checkIn: new Date('2024-05-29T08:30:00Z'),
+      checkOut: new Date('2024-05-29T17:30:00Z'),
       status: 'present'
     }));
   }
 
   // 3. Seats
-  for (let i = 0; i < employees.length; i++) {
+  for (let i = 0; i < 20; i++) {
     await seatSchema.create({
       _id: `S${i + 1}`,
       row: '1',
       tableNumber: `${i + 1}`,
       status: 'occupied',
-      zone_id: 'ZONA',
+      zone_id: '1',
       employee_id: employees[i]._id
     });
   }
 
-    await employeeSchema.create({
-        _id: 'EMP202511',
-        firstname: 'sleep',
-        lastname: 'indream',
-        department: 'IT',
-        position: 'Developer',
-        phone: '08123456711'
-      });
-
-      await attendanceSchema.create({
-        _id: 'ATT11',
-        employee_id: 'EMP202511',
-        checkIn: new Date('2024-05-29T08:00:00Z'),
-        checkOut: new Date('2024-05-29T17:00:00Z'),
-        status: 'present'
-      });
-
-
+  for (let i = 0; i < 30; i++) {
     await seatSchema.create({
-      _id: 'S11',
+      _id: `S${i + 21}`,
       row: '1',
-      tableNumber: '1',
-      status: 'occupied',
-      zone_id: 'ZONB',
-      employee_id: 'EMP202511'
+      tableNumber: `${i + 1}`,
+      status: 'available',
+      zone_id: '2',
+      employee_id: null
     });
-  
+  }
+
 
   console.log('✅ Seeding completed.');
   process.exit(0);

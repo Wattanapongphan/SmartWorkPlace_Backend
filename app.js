@@ -10,6 +10,7 @@ require('./db.js');
 
 var indexRouter = require('./routes/index');
 var seatRouter = require('./routes/seat.js');
+var dashboardRouter = require('./routes/dashboard.js');
 
 
 var app = express();
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/seats', seatRouter);
+app.use('/dashboard', dashboardRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
