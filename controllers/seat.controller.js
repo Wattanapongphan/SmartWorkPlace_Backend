@@ -118,7 +118,6 @@ exports.getseatings = async (req, res) => {
   }
 };
   
-
 exports.filter = async (req, res) => {
   try {
     const { floor, zone, row} = req.query;

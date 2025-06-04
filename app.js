@@ -12,6 +12,8 @@ var indexRouter = require('./routes/index');
 var seatRouter = require('./routes/seat.js');
 var dashboardRouter = require('./routes/dashboard.js');
 var floorRouter = require('./routes/floor.js');
+var branchRouter = require('./routes/building.js');
+var employeeRouter = require('./routes/employee.js');
 
 
 var app = express();
@@ -33,6 +35,9 @@ app.use('/', indexRouter);
 app.use('/seats', seatRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/floors', floorRouter);
+app.use('/branch', branchRouter);
+app.use('/employee', employeeRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
