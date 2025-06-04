@@ -8,10 +8,10 @@ require('dotenv').config();
 // Connect to MongoDB
 require('./db.js');
 
-var indexRouter = require('./routes/index');
 var seatRouter = require('./routes/seat.js');
 var dashboardRouter = require('./routes/dashboard.js');
 var floorRouter = require('./routes/floor.js');
+var zoneRouter = require('./routes/zone.js');
 var branchRouter = require('./routes/building.js');
 var employeeRouter = require('./routes/employee.js');
 
@@ -31,10 +31,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/seats', seatRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/floors', floorRouter);
+app.use('/zones', zoneRouter);
 app.use('/branch', branchRouter);
 app.use('/employee', employeeRouter);
 
