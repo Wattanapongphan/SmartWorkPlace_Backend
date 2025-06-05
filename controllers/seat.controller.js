@@ -99,7 +99,7 @@ exports.getseatings = async (req, res) => {
         },
       },
       {
-  $sort: { floor: 1 }  // เรียงจากน้อยไปมาก เช่น 1, 2, 3, ...
+  $sort: { floor: 1  }  // เรียงจากน้อยไปมาก เช่น 1, 2, 3, ...
 },
 
       // Final output: remove _id field

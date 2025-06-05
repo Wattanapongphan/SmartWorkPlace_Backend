@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/seats', seatRouter);
 app.use('/dashboard', dashboardRouter);
-app.use('/floors', floorRouter);
+app.use('/building', floorRouter);
 app.use('/branch', branchRouter);
 app.use('/employee', employeeRouter);
 

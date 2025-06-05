@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getfloors } = require('../controllers/floor.controller');
+const { getfloors, getselectfloor } = require('../controllers/floor.controller');
 
 // GET all floors
-router.get('/', getfloors);
+router.get('/', getselectfloor);
 
 
 module.exports = router;

@@ -8,7 +8,8 @@ exports.getbuildings = async (req, res) => {
             { id: 'kkc-1', name: 'ตึกขอนแก่น 1', building: 'kkc' },
             { id: 'kkc-2', name: 'ตึกขอนแก่น 2', building: 'kkc' },
             { id: 'hdy-1', name: 'ตึกหาดใหญ่ 1', building: 'hdy' },
-            { id: 'hdy-2', name: 'ตึกหาดใหญ่ 2', building: 'hdy' }
+            { id: 'hdy-2', name: 'ตึกหาดใหญ่ 2', building: 'hdy' },
+            { id: 'sri-1', name: 'ตึกสระบุรี 1', building: 'sri' }
         ]
 
         const {building} = req.query;
