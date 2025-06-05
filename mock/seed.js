@@ -5,7 +5,7 @@ const zoneSchema = require("../models/zone.model");
 const seatSchema = require("../models/seat.model");
 const employeeSchema = require("../models/employee.model");
 const attendanceSchema = require("../models/attendance.model");
-const buildongSchema = require("../models/building.model");
+const buildingSchema = require("../models/building.model");
 
 async function seed() {
   await mongoose.connect(
@@ -18,23 +18,50 @@ async function seed() {
   await seatSchema.deleteMany();
   await employeeSchema.deleteMany();
   await attendanceSchema.deleteMany();
-  await buildongSchema.deleteMany();
+  await buildingSchema.deleteMany();
 
-  //building
-    await buildongSchema.create({  _id: "cnx", name: "ตึกเชียงใหม่"  });
-    await buildongSchema.create({  _id: "bkk", name: "ตึกกรุงเทพ"  });
-    await buildongSchema.create({  _id: "kkc", name: "ตึกขอนแก่น"  });
-    await buildongSchema.create({  _id: "hdy", name: "ตึกหาดใหญ่"  });
+  // 🏢 Buildings
+  const buildings = [
+    { _id: "cnx", name: "ตึกเชียงใหม่" },
+    { _id: "bkk", name: "ตึกกรุงเทพ" },
+    { _id: "kkc", name: "ตึกขอนแก่น" },
+    { _id: "hdy", name: "ตึกหาดใหญ่" },
+  ];
+  await buildingSchema.insertMany(buildings);
 
+  // 🧱 Floors & Zones
+  const floors = [];
+  const zones = [];
+  let floorId = 1;
+  let zoneId = 1;
 
-  // 1. Floor + Zone
-  await floorSchema.create({ _id: "1", name: "Flo3", building_id: "cnx" });
-  await floorSchema.create({ _id: "2", name: "Flo4", building_id: "cnx" });
-  await zoneSchema.create({ _id: "1", name: "ZonA", floor_id: "1" });
-  await zoneSchema.create({ _id: "2", name: "ZonB", floor_id: "1" });
-  await zoneSchema.create({ _id: "3", name: "ZonA", floor_id: "2" });
+  for (const building of buildings) {
+    for (let f = 1; f <= 2; f++) {
+      const floor = {
+        _id: `${floorId}`,
+        name: `Floor ${f}`,
+        building_id: building._id,
+      };
+      floors.push(floor);
 
-  // 2. Employee + Attendance
+      // Zone A & B
+      ["A", "B"].forEach((letter) => {
+        zones.push({
+          _id: `${zoneId}`,
+          name: `Zone ${letter}`,
+          floor_id: floor._id,
+        });
+        zoneId++;
+      });
+
+      floorId++;
+    }
+  }
+
+  await floorSchema.insertMany(floors);
+  await zoneSchema.insertMany(zones);
+
+  // 👩‍💻 Employees & Attendance
   const employees = [];
   const attendance = [];
 
@@ -48,12 +75,11 @@ async function seed() {
       position: "Developer",
       phone: `08123456${i.toString().padStart(2, "0")}`,
     });
-
     employees.push(emp);
 
     attendance.push(
       await attendanceSchema.create({
-        _id: `Att${i}`,
+        _id: `ATT${i}`,
         employee_id: empId,
         checkIn: new Date("2024-05-29T08:30:00Z"),
         checkOut: new Date("2024-05-29T17:30:00Z"),
@@ -62,27 +88,20 @@ async function seed() {
     );
   }
 
-  // 3. Seats
-  for (let i = 0; i < 20; i++) {
-    await seatSchema.create({
-      _id: `S${i + 1}`,
-      row: "1",
-      tableNumber: `${i + 1}`,
-      status: "occupied",
-      zone_id: "1",
-      employee_id: employees[i]._id,
-    });
-  }
-
-  for (let i = 0; i < 30; i++) {
-    await seatSchema.create({
-      _id: `S${i + 21}`,
-      row: "1",
-      tableNumber: `${i + 1}`,
-      status: "available",
-      zone_id: "2",
-      employee_id: null,
-    });
+  // 💺 Seats
+  let seatId = 1;
+  for (const zone of zones) {
+    for (let i = 1; i <= 5; i++) {
+      await seatSchema.create({
+        _id: `S${seatId}`,
+        row: "1",
+        tableNumber: `${i}`,
+        status: i % 2 === 0 ? "available" : "occupied",
+        zone_id: zone._id,
+        employee_id: i % 2 === 0 ? null : employees[(seatId - 1) % 50]._id,
+      });
+      seatId++;
+    }
   }
 
   console.log("✅ Seeding completed.");

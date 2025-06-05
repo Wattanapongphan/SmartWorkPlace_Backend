@@ -1,24 +1,27 @@
-const zoneschema = require("../models/zone.model");
+const zoneSchema = require('../models/zone.model');
+const floorSchema = require('../models/floor.model');
 
 exports.getZones = async (req, res) => {
   try {
-    const { floorId } = req.query;
-    const allZone = await zoneschema.find({});
-    const zones = await zoneschema.find({ floor_id: floorId });
+    const { buildingId, floorId } = req.query;
 
-    if (!floorId || floorId === "all") {
-      return res.status(200).json({
-        message: "Get Zones Successfully",
-        data: allZone.map((z) => z.name),
-      });
-    } else {
-      return res.status(200).json({
-        message: `Get Zones in floor ${floorId} successfully`,
-        data: zones.map((z) => z.name),
-      });
-    }
+    let floorQuery = {};
+    if (buildingId) floorQuery.building_id = buildingId;
+    if (floorId) floorQuery._id = floorId;
+
+    // หาชั้นทั้งหมดในตึกหรือ floor ที่ระบุ
+    const floors = await floorSchema.find(floorQuery).select('_id');
+
+    const floorIds = floors.map(f => f._id);
+    const zones = await zoneSchema.find({ floor_id: { $in: floorIds } });
+
+    res.status(200).json({
+      message: "Zones fetched successfully.",
+      data: zones.map(z => ({ id: z._id, name: z.name })),
+    });
+
   } catch (error) {
     console.error("Error fetching zones:", error);
-    return res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
