@@ -14,13 +14,28 @@ exports.getEmployees = async (req, res) => {
         $sort: { numericId: 1 } // เรียงตามเลขท้ายจริง ๆ
       },
       {
+        $lookup: {
+          from: 'images',
+          localField: '_id',
+          foreignField: 'employee_id',
+          as: 'image'
+        }
+      },
+      {
+        $unwind: {
+          path: '$image',
+          preserveNullAndEmptyArrays: true // ถ้าไม่มีรูปก็ยังคงแสดงข้อมูลพนักงาน
+        }
+      },
+      {
         $project: {
           _id: 1,
           firstname: 1,
           lastname: 1,
           department: 1,
           position: 1,
-          phone: 1
+          phone: 1,
+          image_url: '$image.url' // แสดง URL ของรูปภาพ
         }
       }
     ]);
