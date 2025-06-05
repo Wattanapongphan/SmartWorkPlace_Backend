@@ -17,6 +17,7 @@ exports.getbuildings = async (req, res) => {
         if (!building || building === 'all') {
             return res.status(200).json({
                 success: true,
+                // ควรส่งเป็น (b => b.name) หรือ (b => b.id) ตามที่ต้องการ ไม่เป็น array obj.
                 data: allbuilding.map(b => ({ name: b.name, slug: b.id })),
             });
         }else{
