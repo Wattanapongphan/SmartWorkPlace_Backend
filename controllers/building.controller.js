@@ -17,14 +17,14 @@ exports.getbuildings = async (req, res) => {
         if (!building || building === 'all') {
             return res.status(200).json({
                 success: true,
-                data: allbuilding.map(b => b.name),
+                data: allbuilding.map(b => ({ name: b.name, slug: b.id })),
             });
         }else{
             const filteredBuildings = allbuilding.filter(b => b.building === building);
 
             return res.status(200).json({
                 success: true,
-                data: filteredBuildings.map(b => b.name)
+                data: filteredBuildings.map(b => ({ name: b.name, slug: b.id }))
             });
         }
     } catch (error) {
