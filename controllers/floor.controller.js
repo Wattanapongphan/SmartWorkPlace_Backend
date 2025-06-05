@@ -33,14 +33,14 @@ exports.getselectfloor = async (req, res) => {
         if (!floor || floor === 'all') {
             return res.status(200).json({
                 success: true,
-                data: allfloor.map(b => ({ name: b.name, slug: b.id })),
+                data: allfloor.map(b => ({ name: b.name, slug: b.id , slug_building: b.floor })),
             });
         }else{
             const filteredFloors = allfloor.filter(b => b.floor === floor);
 
             return res.status(200).json({
                 success: true,
-                data: filteredFloors.map(b => ({ name: b.name, slug: b.id }))
+                data: filteredFloors.map(b => ({ name: b.name, slug: b.id , slug_building: b.floor }))
             });
         }
     } catch (error) {
