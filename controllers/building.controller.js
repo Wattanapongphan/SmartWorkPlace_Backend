@@ -17,7 +17,7 @@ exports.getbuildings = async (req, res) => {
 
     if (!building || building === "all") {
       return res.status(200).json({
-        message:"Get buildings Successfully",
+        message: "Get buildings Successfully",
         data: allbuilding.map((b) => b.name),
       });
     } else {
@@ -26,8 +26,8 @@ exports.getbuildings = async (req, res) => {
       );
 
       return res.status(200).json({
-        success: true,
-        data: filteredBuildings.map((b) => b.name),
+        message: "Get building Successfully",
+        data: filteredBuildings.map((b) => ({ id: b.id, name: b.name })),
       });
     }
   } catch (error) {
