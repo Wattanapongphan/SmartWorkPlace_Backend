@@ -254,24 +254,68 @@ exports.filter = async (req, res) => {
 exports.getTotalSeats = async (req, res) => {
   try {
     const data = [
-      {
-        data: [
-          { tableNumber: "1", status: "active", emp_id: "EMP1" },
-          { tableNumber: "2", status: "active", emp_id: "EMP2" },
-          { tableNumber: "3", status: "inactive", emp_id: "EMP3" },
-          { tableNumber: "4", status: "active", emp_id: "EMP4" },
-          { tableNumber: "5", status: "active", emp_id: "EMP5" },
-          { tableNumber: "6", status: "inactive", emp_id: "EMP6" },
-          { tableNumber: "7", status: "inactive", emp_id: "EMP7" },
-          { tableNumber: "8", status: "active", emp_id: "EMP8" },
-          { tableNumber: "9", status: "active", emp_id: "EMP9" },
-          { tableNumber: "10", status: "inactive", emp_id: "EMP10" },
-        ],
-        tableActive: 6,
-        totaltable: 10
-      },
-    ];
-    res.status(200).send(data)
+{
+  data: [
+    { tableNumber: "1",  status: "active",   emp_id: "EMP1"  },
+    { tableNumber: "2",  status: "active",   emp_id: "EMP2"  },
+    { tableNumber: "3",  status: "inactive", emp_id: "null"  },
+    { tableNumber: "4",  status: "active",   emp_id: "EMP4"  },
+    { tableNumber: "5",  status: "active",   emp_id: "EMP5"  },
+    { tableNumber: "6",  status: "inactive", emp_id: "null"  },
+    { tableNumber: "7",  status: "inactive", emp_id: "null"  },
+    { tableNumber: "8",  status: "active",   emp_id: "EMP8"  },
+    { tableNumber: "9",  status: "active",   emp_id: "EMP9"  },
+    { tableNumber: "10", status: "inactive", emp_id: "null" },
+    { tableNumber: "11", status: "active",   emp_id: "EMP11" },
+    { tableNumber: "12", status: "active",   emp_id: "EMP12" },
+    { tableNumber: "13", status: "inactive", emp_id: "null" },
+    { tableNumber: "14", status: "active",   emp_id: "EMP14" },
+    { tableNumber: "15", status: "active",   emp_id: "EMP15" },
+    { tableNumber: "16", status: "inactive", emp_id: "null" },
+    { tableNumber: "17", status: "inactive", emp_id: "null" },
+    { tableNumber: "18", status: "active",   emp_id: "EMP18" },
+    { tableNumber: "19", status: "active",   emp_id: "EMP19" },
+    { tableNumber: "20", status: "inactive", emp_id: "null" },
+    { tableNumber: "21", status: "active",   emp_id: "EMP21" },
+    { tableNumber: "22", status: "active",   emp_id: "EMP22" },
+    { tableNumber: "23", status: "inactive", emp_id: "null" },
+    { tableNumber: "24", status: "active",   emp_id: "EMP24" },
+    { tableNumber: "25", status: "active",   emp_id: "EMP25" },
+    { tableNumber: "26", status: "inactive", emp_id: "null" },
+    { tableNumber: "27", status: "inactive", emp_id: "null" },
+    { tableNumber: "28", status: "active",   emp_id: "EMP28" },
+    { tableNumber: "29", status: "active",   emp_id: "EMP29" },
+    { tableNumber: "30", status: "inactive", emp_id: "null" },
+    { tableNumber: "31", status: "active",   emp_id: "EMP31" },
+    { tableNumber: "32", status: "active",   emp_id: "EMP32" },
+    { tableNumber: "33", status: "inactive", emp_id: "null" },
+    { tableNumber: "34", status: "active",   emp_id: "EMP34" },
+    { tableNumber: "35", status: "active",   emp_id: "EMP35" },
+    { tableNumber: "36", status: "inactive", emp_id: "null" },
+    { tableNumber: "37", status: "inactive", emp_id: "null" },
+    { tableNumber: "38", status: "active",   emp_id: "EMP38" }
+  ],
+  tableActive: 23, 
+  totaltable: 38 
+}];
+
+    // const seats = await seatSchema.find({},'tableNumber status employee_id').lean()
+    // const formmatedData  = seats.map(seat=>({
+    //   tableNumber: seats.tableNumber,
+    //   status: seats.status,
+    //   emp_id: seats.employee_id || null
+    // }))
+
+    // const tableActive = formmatedData.filter(seat => seat.status === "active").length
+    // const totaltable = formmatedData.length
+
+    // const respone = [{
+    //   data: formmatedData,
+    //   tableActive,
+    //   totaltable
+    // }]
+
+    res.status(200).json(data)
   } catch (error) {
     res.status(400).json({
       message: "Cannot Get Data !!!",

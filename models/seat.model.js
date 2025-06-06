@@ -4,7 +4,7 @@ const seatSchema = new mongoose.Schema({
     _id: { type: String },
     row: { type: String },
     tableNumber: { type: String},
-    status: { type: String, enum: ['available', 'occupied'], default: 'available' },
+    status: { type: String, enum: ['active', 'inactive'], default: 'active' },
     zone_id: { type: String, ref: 'zones' },
     employee_id: { type: String, ref: 'employees' , default: null },
 }, {
