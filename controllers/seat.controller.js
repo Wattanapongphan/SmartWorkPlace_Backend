@@ -1,7 +1,7 @@
-const seatSchema = require('../models/seat.model');
+const seatSchema = require("../models/seat.model");
 
-exports.getseatings = async (req, res) => {
- try {
+exports.getSeats = async (req, res) => {
+  try {
     const result = await seatSchema.aggregate([
       // Join Zone
       {
@@ -99,8 +99,8 @@ exports.getseatings = async (req, res) => {
         },
       },
       {
-  $sort: { floor: 1 }  // เรียงจากน้อยไปมาก เช่น 1, 2, 3, ...
-},
+        $sort: { floor: 1 }, // เรียงจากน้อยไปมาก เช่น 1, 2, 3, ...
+      },
 
       // Final output: remove _id field
       {
@@ -117,15 +117,21 @@ exports.getseatings = async (req, res) => {
     return res.status(500).json({ message: "Error fetching seats", error });
   }
 };
-  
+
 exports.filter = async (req, res) => {
   try {
-    const { floor, zone, row} = req.query;
+    const { floor, zone, row } = req.query;
     const match = {};
 
-    if (floor) { match['floor.name'] = floor;}
-    if (zone) { match['zone.name'] = zone;}
-    if (row) { match.row = row; }
+    if (floor) {
+      match["floor.name"] = floor;
+    }
+    if (zone) {
+      match["zone.name"] = zone;
+    }
+    if (row) {
+      match.row = row;
+    }
 
     const result = await seatSchema.aggregate([
       // Join Zone
@@ -227,7 +233,7 @@ exports.filter = async (req, res) => {
         },
       },
       {
-        $sort: { floor: 1 }  // Sort by floor name
+        $sort: { floor: 1 }, // Sort by floor name
       },
       // Final output: remove _id field
       {
@@ -240,9 +246,36 @@ exports.filter = async (req, res) => {
     ]);
 
     return res.json(result);
-
   } catch (error) {
-    return res.status(500).json({ message: 'Error fetching data', error });
+    return res.status(500).json({ message: "Error fetching data", error });
   }
 };
 
+exports.getTotalSeats = async (req, res) => {
+  try {
+    const table = [
+      {
+        data: [
+          { tableNumber: "1", status: "active", emp_id: "EMP1" },
+          { tableNumber: "2", status: "active", emp_id: "EMP2" },
+          { tableNumber: "3", status: "inactive", emp_id: "EMP3" },
+          { tableNumber: "4", status: "active", emp_id: "EMP4" },
+          { tableNumber: "5", status: "active", emp_id: "EMP5" },
+          { tableNumber: "6", status: "inactive", emp_id: "EMP6" },
+          { tableNumber: "7", status: "inactive", emp_id: "EMP7" },
+          { tableNumber: "8", status: "active", emp_id: "EMP8" },
+          { tableNumber: "9", status: "active", emp_id: "EMP9" },
+          { tableNumber: "10", status: "inactive", emp_id: "EMP10" },
+        ],
+        tableActive: 6,
+        totaltable: 10
+      },
+    ];
+    res.status(200).send(table)
+  } catch (error) {
+    res.status(400).json({
+      message: "Cannot Get Seats",
+      error: error.message,
+    });
+  }
+};

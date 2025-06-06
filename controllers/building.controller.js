@@ -18,7 +18,7 @@ exports.getbuildings = async (req, res) => {
     if (!building || building === "all") {
       return res.status(200).json({
         message: "Get buildings Successfully",
-        data: allbuilding.map((b) => b.name),
+        data: allbuilding.map((b) => ({ id: b.id, name: b.name })),
       });
     } else {
       const filteredBuildings = allbuilding.filter(
