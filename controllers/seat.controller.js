@@ -253,7 +253,7 @@ exports.filter = async (req, res) => {
 
 exports.getTotalSeats = async (req, res) => {
   try {
-    const table = [
+    const data = [
       {
         data: [
           { tableNumber: "1", status: "active", emp_id: "EMP1" },
@@ -271,10 +271,10 @@ exports.getTotalSeats = async (req, res) => {
         totaltable: 10
       },
     ];
-    res.status(200).send(table)
+    res.status(200).send(data)
   } catch (error) {
     res.status(400).json({
-      message: "Cannot Get Seats",
+      message: "Cannot Get Data !!!",
       error: error.message,
     });
   }
