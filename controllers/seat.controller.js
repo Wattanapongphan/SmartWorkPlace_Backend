@@ -1,4 +1,6 @@
 const seatSchema = require('../models/seat.model');
+const employeeSchema = require('../models/employee.model');
+const seat2Schema = require('../models/seat2.model');
 
 exports.getseatings = async (req, res) => {
  try {
@@ -246,72 +248,180 @@ exports.filter = async (req, res) => {
   }
 };
 
-
 exports.gettable = async (req, res) => {
   try {
-    const data = [{
-      data : [
-        {
-          "emp_id":"EMP1",
-          "tableNumber":"1",
-          "status":"active",
-        },
-        {
-          "emp_id":"EMP2",
-          "tableNumber":"2",
-          "status":"active",
-        },
-        {
-          "emp_id":"EMP3",
-          "tableNumber":"3",
-          "status":"active",
-        },
-        {
-          "emp_id":"EMP4",
-          "tableNumber":"4",
-          "status":"active",
-        },
-        {
-          "emp_id":"EMP5",
-          "tableNumber":"5",
-          "status":"active",
-        },
-        {
-          "emp_id":null,
-          "tableNumber":"6",
-          "status":"inactive",
-        },
-        {
-          "emp_id":null,
-          "tableNumber":"7",
-          "status":"inactive",
-        },
-        {
-          "emp_id":"EMP8",
-          "tableNumber":"8",
-          "status":"active",
-        },
-        {
-          "emp_id": null,
-          "tableNumber":"9",
-          "status":"inactive",
-        },
-        {
-          "emp_id":"EMP10",
-          "tableNumber":"10",
-          "status":"active",
-        }
+    // const data = [{
+    //   data : [
+    //     {
+    //       "emp_id":"EMP1",
+    //       "tableNumber":"1",
+    //       "status":"active",
+    //     },
+    //     {
+    //       "emp_id":"EMP2",
+    //       "tableNumber":"2",
+    //       "status":"active",
+    //     },
+    //     {
+    //       "emp_id":"EMP3",
+    //       "tableNumber":"3",
+    //       "status":"active",
+    //     },
+    //     {
+    //       "emp_id":"EMP4",
+    //       "tableNumber":"4",
+    //       "status":"active",
+    //     },
+    //     {
+    //       "emp_id":"EMP5",
+    //       "tableNumber":"5",
+    //       "status":"active",
+    //     },
+    //     {
+    //       "emp_id":null,
+    //       "tableNumber":"6",
+    //       "status":"inactive",
+    //     },
+    //     {
+    //       "emp_id":null,
+    //       "tableNumber":"7",
+    //       "status":"inactive",
+    //     },
+    //     {
+    //       "emp_id":"EMP8",
+    //       "tableNumber":"8",
+    //       "status":"active",
+    //     },
+    //     {
+    //       "emp_id": null,
+    //       "tableNumber":"9",
+    //       "status":"inactive",
+    //     },
+    //     {
+    //       "emp_id":"EMP10",
+    //       "tableNumber":"10",
+    //       "status":"active",
+    //     }
 
-      ],
+    //   ],
 
-      tableActive : '7',
-      totalTable : 10
-    }
-    ]
+    //   tableActive : '7',
+    //   totalTable : 10
+    // }
+    // ]
 
-    return res.json(data);
+    const seats = await seat2Schema.find({}, 'emp_id tableNumber status -_id');
+
+    const totalable = seats.length;
+    const tableActive = seats.filter(seat => seat.status === 'active').length;
+
+  
+    return res.status(200).json({
+      data: seats,
+      tableActive: tableActive,
+      totalTable: totalable
+    })
 
   } catch (error) {
     return res.status(500).json({ message: 'Error fetching table data', error });
   }
 }
+
+exports.posttable = async (req, res) => {
+  try {
+    let { emp_id, tableNumber, status } = req.body;
+
+    const data_emp = await employeeSchema.findOne({ emp_id });
+    if (!data_emp) {
+
+      return res.status(404).json({ message: 'Employee not found' });
+    }else{
+
+      const data_seat = await seat2Schema.findOne({ tableNumber });
+      const data_emp_seat = await seat2Schema.find({})
+
+      if (data_seat.status === 'inactive') {
+        return res.status(400).json({ message: 'Table is already inactive' });
+      } 
+
+      for (i = 0; i < data_emp_seat.length; i++) {
+        if (data_emp_seat[i].emp_id === emp_id) {
+          return res.status(400).json({ message: 'Employee already has a seat' });
+        }
+      }
+    }
+
+    const newSeat = new seat2Schema({
+      emp_id,
+      tableNumber,
+      status
+    });
+
+    await newSeat.save();
+    return res.status(201).json({ message: 'Table created successfully', data: newSeat });
+
+  } catch (error) {
+    return res.status(500).json({ message: 'Error creating table', error });
+  }
+}
+
+exports.deletetable = async (req, res) => {
+  try {
+    const { tableNumber } = req.params;
+
+    const updatedSeat = await seat2Schema.findOneAndUpdate(
+      { tableNumber },
+      {
+        emp_id: null,
+        status: 'inactive'
+      },
+      { new: true }
+    );
+
+    if (!updatedSeat) {
+      return res.status(404).json({ message: 'Table not found or already inactive' });
+    }
+
+    return res.status(200).json({ message: 'Successfully removed the employee from this seat', data: updatedSeat });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error deleting table', error });
+  }
+};
+
+
+exports.updatetable = async (req, res) => {
+  try {
+    const { emp_id, tableNumber } = req.params;
+
+    const data_emp = await employeeSchema.findById(emp_id);
+    if (!data_emp) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    const data_emp_seat = await seat2Schema.find({ emp_id });
+    if (data_emp_seat.length > 0) {
+      return res.status(400).json({ message: 'Employee already has a seat' });
+    }
+
+    const updatedSeat = await seat2Schema.findOneAndUpdate(
+      { tableNumber },
+      {
+        emp_id,
+        status: 'active'
+      },
+      { new: true }
+    );
+
+    if (!updatedSeat) {
+      return res.status(404).json({ message: 'Table not found or update failed' });
+    }
+
+    return res.status(200).json({ message: 'Table updated successfully', data: updatedSeat });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error updating table', error });
+  }
+};
