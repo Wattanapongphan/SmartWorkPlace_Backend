@@ -246,3 +246,72 @@ exports.filter = async (req, res) => {
   }
 };
 
+
+exports.gettable = async (req, res) => {
+  try {
+    const data = [{
+      data : [
+        {
+          "emp_id":"EMP1",
+          "tableNumber":"1",
+          "status":"active",
+        },
+        {
+          "emp_id":"EMP2",
+          "tableNumber":"2",
+          "status":"active",
+        },
+        {
+          "emp_id":"EMP3",
+          "tableNumber":"3",
+          "status":"active",
+        },
+        {
+          "emp_id":"EMP4",
+          "tableNumber":"4",
+          "status":"active",
+        },
+        {
+          "emp_id":"EMP5",
+          "tableNumber":"5",
+          "status":"active",
+        },
+        {
+          "emp_id":null,
+          "tableNumber":"6",
+          "status":"inactive",
+        },
+        {
+          "emp_id":null,
+          "tableNumber":"7",
+          "status":"inactive",
+        },
+        {
+          "emp_id":"EMP8",
+          "tableNumber":"8",
+          "status":"active",
+        },
+        {
+          "emp_id": null,
+          "tableNumber":"9",
+          "status":"inactive",
+        },
+        {
+          "emp_id":"EMP10",
+          "tableNumber":"10",
+          "status":"active",
+        }
+
+      ],
+
+      tableActive : '7',
+      totalTable : 10
+    }
+    ]
+
+    return res.json(data);
+
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching table data', error });
+  }
+}
