@@ -8,5 +8,4 @@ const imageSchema = new mongoose.Schema({
     timestamps: true
 });
 
-
 module.exports = mongoose.model('images', imageSchema);

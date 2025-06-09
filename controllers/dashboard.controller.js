@@ -10,6 +10,8 @@ exports.getDashboardData = async (req, res) => {
 
     const totalSeats = await seatSchema.countDocuments();
 
+    // count occupied and available seats in date.now
+    
     const occupiedSeats = await seatSchema.countDocuments({ status: 'occupied' });
 
     const availableSeats = await seatSchema.countDocuments({ status: 'available' });

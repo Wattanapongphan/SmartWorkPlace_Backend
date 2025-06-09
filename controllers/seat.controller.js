@@ -1,6 +1,6 @@
 const seatSchema = require('../models/seat.model');
 const employeeSchema = require('../models/employee.model');
-const seat2Schema = require('../models/seat2.model');
+const zoneSchema = require('../models/zone.model');
 
 exports.getseatings = async (req, res) => {
  try {
@@ -250,74 +250,28 @@ exports.filter = async (req, res) => {
 
 exports.gettable = async (req, res) => {
   try {
-    // const data = [{
-    //   data : [
-    //     {
-    //       "emp_id":"EMP1",
-    //       "tableNumber":"1",
-    //       "status":"active",
-    //     },
-    //     {
-    //       "emp_id":"EMP2",
-    //       "tableNumber":"2",
-    //       "status":"active",
-    //     },
-    //     {
-    //       "emp_id":"EMP3",
-    //       "tableNumber":"3",
-    //       "status":"active",
-    //     },
-    //     {
-    //       "emp_id":"EMP4",
-    //       "tableNumber":"4",
-    //       "status":"active",
-    //     },
-    //     {
-    //       "emp_id":"EMP5",
-    //       "tableNumber":"5",
-    //       "status":"active",
-    //     },
-    //     {
-    //       "emp_id":null,
-    //       "tableNumber":"6",
-    //       "status":"inactive",
-    //     },
-    //     {
-    //       "emp_id":null,
-    //       "tableNumber":"7",
-    //       "status":"inactive",
-    //     },
-    //     {
-    //       "emp_id":"EMP8",
-    //       "tableNumber":"8",
-    //       "status":"active",
-    //     },
-    //     {
-    //       "emp_id": null,
-    //       "tableNumber":"9",
-    //       "status":"inactive",
-    //     },
-    //     {
-    //       "emp_id":"EMP10",
-    //       "tableNumber":"10",
-    //       "status":"active",
-    //     }
+    const { zoneName } = req.params;
 
-    //   ],
+    // from ZoneA to Zone A
+    const formattedZone = zoneName.replace(/([a-z])([A-Z])/g, '$1 $2');
 
-    //   tableActive : '7',
-    //   totalTable : 10
-    // }
-    // ]
+    // find zone._id use zonedata._id
+    const zonedata = await zoneSchema.findOne({ name: formattedZone });
 
-    const seats = await seat2Schema.find({}, 'emp_id tableNumber status -_id');
+    const seats = await seatSchema.find({ zone_id: zonedata._id }, 'emp_id tableNumber status -_id');
 
-    const totalable = seats.length;
-    const tableActive = seats.filter(seat => seat.status === 'active').length;
+    const seatsChangeStatus = seats.map(seat => ({
+      employee_id: seat.employee_id,
+      tableNumber: seat.tableNumber,
+      status: seat.status === 'occupied' ? 'active' : 'inactive'
+    }));
+
+    const totalable = seatsChangeStatus.length;
+    const tableActive = seatsChangeStatus.filter(seat => seat.status === 'inactive').length;
 
   
     return res.status(200).json({
-      data: seats,
+      data: seatsChangeStatus,
       tableActive: tableActive,
       totalTable: totalable
     })
@@ -327,50 +281,19 @@ exports.gettable = async (req, res) => {
   }
 }
 
-exports.posttable = async (req, res) => {
-  try {
-    let { emp_id, tableNumber, status } = req.body;
-
-    const data_emp = await employeeSchema.findOne({ emp_id });
-    if (!data_emp) {
-
-      return res.status(404).json({ message: 'Employee not found' });
-    }else{
-
-      const data_seat = await seat2Schema.findOne({ tableNumber });
-      const data_emp_seat = await seat2Schema.find({})
-
-      if (data_seat.status === 'inactive') {
-        return res.status(400).json({ message: 'Table is already inactive' });
-      } 
-
-      for (i = 0; i < data_emp_seat.length; i++) {
-        if (data_emp_seat[i].emp_id === emp_id) {
-          return res.status(400).json({ message: 'Employee already has a seat' });
-        }
-      }
-    }
-
-    const newSeat = new seat2Schema({
-      emp_id,
-      tableNumber,
-      status
-    });
-
-    await newSeat.save();
-    return res.status(201).json({ message: 'Table created successfully', data: newSeat });
-
-  } catch (error) {
-    return res.status(500).json({ message: 'Error creating table', error });
-  }
-}
-
 exports.deletetable = async (req, res) => {
   try {
-    const { tableNumber } = req.params;
+    const { zoneName , tableNumber } = req.params;
 
-    const updatedSeat = await seat2Schema.findOneAndUpdate(
-      { tableNumber },
+    // from ZoneA to Zone A
+    const formattedZone = zoneName.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+    // find zone._id use zonedata._id
+    const zonedata = await zoneSchema.findOne({ name: formattedZone });
+
+
+    const updatedSeat = await seatSchema.findOneAndUpdate(
+      { zone_id: zonedata._id ,tableNumber },
       {
         emp_id: null,
         status: 'inactive'
@@ -390,23 +313,28 @@ exports.deletetable = async (req, res) => {
   }
 };
 
-
 exports.updatetable = async (req, res) => {
   try {
-    const { emp_id, tableNumber } = req.params;
+    const { zoneName, emp_id, tableNumber } = req.params;
+
+    // from ZoneA to Zone A
+    const formattedZone = zoneName.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+    // find zone._id use zonedata._id
+    const zonedata = await zoneSchema.findOne({ name: formattedZone });
 
     const data_emp = await employeeSchema.findById(emp_id);
     if (!data_emp) {
       return res.status(404).json({ message: 'Employee not found' });
     }
 
-    const data_emp_seat = await seat2Schema.find({ emp_id });
+    const data_emp_seat = await seatSchema.find({ emp_id });
     if (data_emp_seat.length > 0) {
       return res.status(400).json({ message: 'Employee already has a seat' });
     }
 
-    const updatedSeat = await seat2Schema.findOneAndUpdate(
-      { tableNumber },
+    const updatedSeat = await seatSchema.findOneAndUpdate(
+      { zone_id: zonedata._id ,tableNumber },
       {
         emp_id,
         status: 'active'

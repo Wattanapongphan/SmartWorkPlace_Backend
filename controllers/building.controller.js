@@ -1,34 +1,27 @@
+const buildingSchema = require('../models/building.model');
+
 exports.getbuildings = async (req, res) => {
     try {
-        const allbuilding = [
-             { id: 'cnx-1', name: 'ตึกเชียงใหม่ 1', building: 'cnx' },
-            { id: 'cnx-2', name: 'ตึกเชียงใหม่ 2', building: 'cnx' },
-            { id: 'bkk-1', name: 'ตึกกรุงเทพ 1', building: 'bkk' },
-            { id: 'bkk-2', name: 'ตึกกรุงเทพ 2', building: 'bkk' },
-            { id: 'kkc-1', name: 'ตึกขอนแก่น 1', building: 'kkc' },
-            { id: 'kkc-2', name: 'ตึกขอนแก่น 2', building: 'kkc' },
-            { id: 'hdy-1', name: 'ตึกหาดใหญ่ 1', building: 'hdy' },
-            { id: 'hdy-2', name: 'ตึกหาดใหญ่ 2', building: 'hdy' },
-            { id: 'sri-1', name: 'ตึกสระบุรี 1', building: 'sri' }
-        ]
+        const allBuildings = await buildingSchema.find({});
 
-        const {building} = req.query;
+        const { building } = req.query;
 
         if (!building || building === 'all') {
             return res.status(200).json({
                 success: true,
-                // ควรส่งเป็น (b => b.name) หรือ (b => b.id) ตามที่ต้องการ ไม่เป็น array obj.
-                data: allbuilding.map(b => ({ name: b.name, slug: b.id })),
+                data: allBuildings.map(b => ({ name: b.name, slug: b.id })),
             });
-        }else{
-            const filteredBuildings = allbuilding.filter(b => b.building === building);
+        } else {
+            const filteredBuildings = allBuildings.filter(b => b.location === building);
 
             return res.status(200).json({
                 success: true,
                 data: filteredBuildings.map(b => ({ name: b.name, slug: b.id }))
             });
         }
+
     } catch (error) {
         return res.status(500).json({ message: "Error fetching buildings", error });
     }
 }
+
