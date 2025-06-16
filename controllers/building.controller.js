@@ -9,14 +9,14 @@ exports.getbuildings = async (req, res) => {
         if (!building || building === 'all') {
             return res.status(200).json({
                 success: true,
-                data: allBuildings.map(b => ({ name: b.name, slug: b.id })),
+                data: allBuildings.map(b => ({ name: b.name, code: b.id })),
             });
         } else {
             const filteredBuildings = allBuildings.filter(b => b.location === building);
 
             return res.status(200).json({
                 success: true,
-                data: filteredBuildings.map(b => ({ name: b.name, slug: b.id }))
+                data: filteredBuildings.map(b => ({ name: b.name, code: b.id }))
             });
         }
 
