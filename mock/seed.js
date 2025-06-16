@@ -131,37 +131,37 @@ async function seed() {
 
 await emplocationSchema.create([
   // Zone A
-  { emp_id: "EMP1", zone: "cnx-stp-3-A" },
-  { emp_id: "EMP2", zone: "cnx-stp-3-A" },
-  { emp_id: "EMP3", zone: "cnx-stp-3-A" },
-  { emp_id: "EMP4", zone: "cnx-stp-3-A" },
-  { emp_id: "EMP5", zone: "cnx-stp-3-A" },
+  { employee: "EMP1", zone: "cnx-stp-3-A" },
+  { employee: "EMP2", zone: "cnx-stp-3-A" },
+  { employee: "EMP3", zone: "cnx-stp-3-A" },
+  { employee: "EMP4", zone: "cnx-stp-3-A" },
+  { employee: "EMP5", zone: "cnx-stp-3-A" },
 
   // Zone B
-  { emp_id: "EMP6", zone: "cnx-stp-3-B" },
-  { emp_id: "EMP7", zone: "cnx-stp-3-B" },
-  { emp_id: "EMP8", zone: "cnx-stp-3-B" },
-  { emp_id: "EMP9", zone: "cnx-stp-3-B" },
+  { employee: "EMP6", zone: "cnx-stp-3-B" },
+  { employee: "EMP7", zone: "cnx-stp-3-B" },
+  { employee: "EMP8", zone: "cnx-stp-3-B" },
+  { employee: "EMP9", zone: "cnx-stp-3-B" },
 
   // Zone C
-  { emp_id: "EMP10", zone: "cnx-stp-3-C" },
-  { emp_id: "EMP11", zone: "cnx-stp-3-C" },
-  { emp_id: "EMP12", zone: "cnx-stp-3-C" },
-  { emp_id: "EMP13", zone: "cnx-stp-3-C" },
-  { emp_id: "EMP14", zone: "cnx-stp-3-C" },
+  { employee: "EMP10", zone: "cnx-stp-3-C" },
+  { employee: "EMP11", zone: "cnx-stp-3-C" },
+  { employee: "EMP12", zone: "cnx-stp-3-C" },
+  { employee: "EMP13", zone: "cnx-stp-3-C" },
+  { employee: "EMP14", zone: "cnx-stp-3-C" },
 
   // Zone D
-  { emp_id: "EMP15", zone: "cnx-stp-3-D" },
-  { emp_id: "EMP16", zone: "cnx-stp-3-D" },
-  { emp_id: "EMP17", zone: "cnx-stp-3-D" },
-  { emp_id: "EMP18", zone: "cnx-stp-3-D" },
+  { employee: "EMP15", zone: "cnx-stp-3-D" },
+  { employee: "EMP16", zone: "cnx-stp-3-D" },
+  { employee: "EMP17", zone: "cnx-stp-3-D" },
+  { employee: "EMP18", zone: "cnx-stp-3-D" },
 
   // Zone E
-  { emp_id: "EMP19", zone: "cnx-stp-3-E" },
-  { emp_id: "EMP20", zone: "cnx-stp-3-E" },
-  { emp_id: "EMP21", zone: "cnx-stp-3-E" },
-  { emp_id: "EMP22", zone: "cnx-stp-3-E" },
-  { emp_id: "EMP23", zone: "cnx-stp-3-E" }
+  { employee: "EMP19", zone: "cnx-stp-3-E" },
+  { employee: "EMP20", zone: "cnx-stp-3-E" },
+  { employee: "EMP21", zone: "cnx-stp-3-E" },
+  { employee: "EMP22", zone: "cnx-stp-3-E" },
+  { employee: "EMP23", zone: "cnx-stp-3-E" }
 ]);
 
 
