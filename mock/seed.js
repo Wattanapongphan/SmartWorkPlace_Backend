@@ -68,12 +68,12 @@ async function seed() {
     // mock zone data
     //{_id: '' , name: '' ,row: [''], tableRow: [''], floor_id: ''}
     await zoneSchema.create([
-        {_id: 'cnx-stp-3-A0' , name: 'Zone A' , row: ['1', '2', '3'], tableRow: ['14', '28', '38'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-3-A1' , name: 'Zone B' , row: ['1', '2', '3', '4'], tableRow: ['20', '36', '52', '68'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-3-A2' , name: 'Zone C' , row: ['1', '2', '3'], tableRow: ['16', '32', '48'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-3-A3' , name: 'Zone D' , row: ['1', '2', '3', '4'], tableRow: ['16', '32', '48', '58'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-3-A4' , name: 'Zone E' , row: ['1', '2', '3'], tableRow: ['12', '26', '44'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-4-A0' , name: 'Zone F' , row: ['1', '2'], tableRow: ['16', '28'], floor_id: 'cnx-stp-4'},
+        {_id: 'cnx-stp-3-A0' , name: 'Zone A0' , row: ['1', '2', '3'], tableRow: ['14', '28', '38'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-3-A1' , name: 'Zone A1' , row: ['1', '2', '3', '4'], tableRow: ['20', '36', '52', '68'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-3-A2' , name: 'Zone A2' , row: ['1', '2', '3'], tableRow: ['16', '32', '48'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-3-A3' , name: 'Zone A3' , row: ['1', '2', '3', '4'], tableRow: ['16', '32', '48', '58'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-3-A4' , name: 'Zone A4' , row: ['1', '2', '3'], tableRow: ['12', '26', '44'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-4-A0' , name: 'Zone A0' , row: ['1', '2'], tableRow: ['16', '28'], floor_id: 'cnx-stp-4'},
     ])
 
     // mock seat data

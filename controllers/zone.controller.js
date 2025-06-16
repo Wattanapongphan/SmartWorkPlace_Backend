@@ -31,7 +31,7 @@ exports.getselectZone = async (req, res) => {
     );
 
     const responseData = filterzone.map((z) => ({
-      name: z.name
+      name: z.name , floor_id: z.floor_id 
     }));
 
     return res.status(200).json({
