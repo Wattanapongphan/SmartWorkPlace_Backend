@@ -223,7 +223,7 @@ exports.getEmployeeLocationByZone = async (req, res) => {
         $project: {
           _id: 0,
           employee: {
-            emp:'$employee._id',
+            emp_id:'$employee._id',
             firstname: '$employee.firstname',
             lastname: '$employee.lastname'
           },

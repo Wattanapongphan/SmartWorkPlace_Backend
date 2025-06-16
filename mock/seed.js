@@ -7,6 +7,7 @@ const seatSchema = require('../models/seat.model');
 const imgSchema = require('../models/image.model');
 const attendanceSchema = require('../models/attendance.model');
 const emplocationSchema = require('../models/employeeLocation.model');
+const employeeSchema = require('../models/employee.model');
 
 async function seed() {
     await mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`);
@@ -19,6 +20,7 @@ async function seed() {
     await imgSchema.deleteMany();
     await attendanceSchema.deleteMany();
     await emplocationSchema.deleteMany();
+    await employeeSchema.deleteMany();
 
     // mock building data
     await buildingSchema.create([
@@ -66,12 +68,12 @@ async function seed() {
     // mock zone data
     //{_id: '' , name: '' ,row: [''], tableRow: [''], floor_id: ''}
     await zoneSchema.create([
-        {_id: 'cnx-stp-3-A' , name: 'Zone A' , row: ['1', '2', '3'], tableRow: ['14', '28', '38'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-3-B' , name: 'Zone B' , row: ['1', '2', '3', '4'], tableRow: ['20', '36', '52', '68'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-3-C' , name: 'Zone C' , row: ['1', '2', '3'], tableRow: ['16', '32', '48'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-3-D' , name: 'Zone D' , row: ['1', '2', '3', '4'], tableRow: ['16', '32', '48', '58'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-3-E' , name: 'Zone E' , row: ['1', '2', '3'], tableRow: ['12', '26', '44'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-4-F' , name: 'Zone F' , row: ['1', '2'], tableRow: ['16', '28'], floor_id: 'cnx-stp-4'},
+        {_id: 'cnx-stp-3-A0' , name: 'Zone A' , row: ['1', '2', '3'], tableRow: ['14', '28', '38'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-3-A1' , name: 'Zone B' , row: ['1', '2', '3', '4'], tableRow: ['20', '36', '52', '68'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-3-A2' , name: 'Zone C' , row: ['1', '2', '3'], tableRow: ['16', '32', '48'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-3-A3' , name: 'Zone D' , row: ['1', '2', '3', '4'], tableRow: ['16', '32', '48', '58'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-3-A4' , name: 'Zone E' , row: ['1', '2', '3'], tableRow: ['12', '26', '44'], floor_id: 'cnx-stp-3'},
+        {_id: 'cnx-stp-4-A0' , name: 'Zone F' , row: ['1', '2'], tableRow: ['16', '28'], floor_id: 'cnx-stp-4'},
     ])
 
     // mock seat data
@@ -164,6 +166,8 @@ await emplocationSchema.create([
   { employee: "EMP23", zone: "cnx-stp-3-A4" }
 ]);
 
+    
+
 
     let num = 51;
     // mock seat zone: cnx-stp-3-B
@@ -250,7 +254,28 @@ await emplocationSchema.create([
 
     await attendanceSchema.deleteMany({});
     await attendanceSchema.insertMany(attendanceArray);
+
+    const departments = ['IT', 'HR', 'Finance', 'Marketing', 'Sales'];
+    const positions = ['Developer', 'Manager', 'Analyst', 'Designer', 'Support'];
+    const employees = [];
+
+  for (let i = 0; i <= 40; i++) {
+    const empId = `EMP${i}`;
+    employees.push({
+      _id: empId,
+      firstname: `User${i}`,
+      lastname: `Lastname${i}`,
+      department: departments[i % departments.length],
+      position: positions[i % positions.length],
+      phone: `08123456${String(i).padStart(2, '0')}`,
+    });
+  }
+
+    await employeeSchema.deleteMany({});
+    await employeeSchema.insertMany(employees);
 }
+
+
 
 seed()
     .then(() => {
