@@ -1,4 +1,5 @@
 const employeeSchema = require('../models/employee.model');
+const emplocationSchema = require('../models/employeeLocation.model');
 
 exports.getEmployees = async (req, res) => {
   try {
@@ -131,3 +132,22 @@ exports.getEmployeeById = async (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 }
+
+exports.getEmployeeLocation = async (req, res) => {
+  try {
+    const emplocation = await emplocationSchema
+      .find()
+      .populate('emp_id')
+      .populate({
+        path: 'zone',
+        select: '_id name floor_id'
+      });
+
+
+      
+    return res.status(200).json({ success: true, data: emplocation });
+  } catch (error) {
+    console.error('Error fetching employee location:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};

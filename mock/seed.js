@@ -6,6 +6,7 @@ const zoneSchema = require('../models/zone.model');
 const seatSchema = require('../models/seat.model');
 const imgSchema = require('../models/image.model');
 const attendanceSchema = require('../models/attendance.model');
+const emplocationSchema = require('../models/employeeLocation.model');
 
 async function seed() {
     await mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`);
@@ -17,6 +18,7 @@ async function seed() {
     await seatSchema.deleteMany();
     await imgSchema.deleteMany();
     await attendanceSchema.deleteMany();
+    await emplocationSchema.deleteMany();
 
     // mock building data
     await buildingSchema.create([
@@ -126,6 +128,42 @@ async function seed() {
         {_id: '49', tableNumber: '11', status: 'occupied', zone_id: 'cnx-stp-3-B', employee_id: 'EMP49'},
         {_id: '50', tableNumber: '12', status: 'occupied', zone_id: 'cnx-stp-3-B', employee_id: 'EMP50'},
     ]);
+
+await emplocationSchema.create([
+  // Zone A
+  { emp_id: "EMP1", zone: "cnx-stp-3-A" },
+  { emp_id: "EMP2", zone: "cnx-stp-3-A" },
+  { emp_id: "EMP3", zone: "cnx-stp-3-A" },
+  { emp_id: "EMP4", zone: "cnx-stp-3-A" },
+  { emp_id: "EMP5", zone: "cnx-stp-3-A" },
+
+  // Zone B
+  { emp_id: "EMP6", zone: "cnx-stp-3-B" },
+  { emp_id: "EMP7", zone: "cnx-stp-3-B" },
+  { emp_id: "EMP8", zone: "cnx-stp-3-B" },
+  { emp_id: "EMP9", zone: "cnx-stp-3-B" },
+
+  // Zone C
+  { emp_id: "EMP10", zone: "cnx-stp-3-C" },
+  { emp_id: "EMP11", zone: "cnx-stp-3-C" },
+  { emp_id: "EMP12", zone: "cnx-stp-3-C" },
+  { emp_id: "EMP13", zone: "cnx-stp-3-C" },
+  { emp_id: "EMP14", zone: "cnx-stp-3-C" },
+
+  // Zone D
+  { emp_id: "EMP15", zone: "cnx-stp-3-D" },
+  { emp_id: "EMP16", zone: "cnx-stp-3-D" },
+  { emp_id: "EMP17", zone: "cnx-stp-3-D" },
+  { emp_id: "EMP18", zone: "cnx-stp-3-D" },
+
+  // Zone E
+  { emp_id: "EMP19", zone: "cnx-stp-3-E" },
+  { emp_id: "EMP20", zone: "cnx-stp-3-E" },
+  { emp_id: "EMP21", zone: "cnx-stp-3-E" },
+  { emp_id: "EMP22", zone: "cnx-stp-3-E" },
+  { emp_id: "EMP23", zone: "cnx-stp-3-E" }
+]);
+
 
     let num = 51;
     // mock seat zone: cnx-stp-3-B
