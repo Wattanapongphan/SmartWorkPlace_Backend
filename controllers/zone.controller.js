@@ -98,11 +98,11 @@ exports.getonlineEmployees = async (req, res) => {
             { emp_id: 'EMP45', firstname: 'Hank', lastname: 'Lopez', zone_id: 'cnx-stp-3-E' },
 
             // Zone F
-            { emp_id: 'EMP46', firstname: 'Ivy', lastname: 'Gonzalez', zone_id: 'cnx-stp-3-F' },
-            { emp_id: 'EMP47', firstname: 'Oscar', lastname: 'Rivera', zone_id: 'cnx-stp-3-F' },
-            { emp_id: 'EMP48', firstname: 'Ruby', lastname: 'Torres', zone_id: 'cnx-stp-3-F' },
-            { emp_id: 'EMP49', firstname: 'Victor', lastname: 'Ramirez', zone_id: 'cnx-stp-3-F' },
-            { emp_id: 'EMP50', firstname: 'Yara', lastname: 'Flores', zone_id: 'cnx-stp-3-F' }
+            { emp_id: 'EMP46', firstname: 'Ivy', lastname: 'Gonzalez', zone_id: 'cnx-stp-4-F' },
+            { emp_id: 'EMP47', firstname: 'Oscar', lastname: 'Rivera', zone_id: 'cnx-stp-4-F' },
+            { emp_id: 'EMP48', firstname: 'Ruby', lastname: 'Torres', zone_id: 'cnx-stp-4-F' },
+            { emp_id: 'EMP49', firstname: 'Victor', lastname: 'Ramirez', zone_id: 'cnx-stp-4-F' },
+            { emp_id: 'EMP50', firstname: 'Yara', lastname: 'Flores', zone_id: 'cnx-stp-4-F' }
         ];
 
         const emponlineFiltered = emponline.filter(emp => emp.zone_id === zonedata._id);
