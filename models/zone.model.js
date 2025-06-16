@@ -5,7 +5,7 @@ const zoneSchema = new mongoose.Schema({
     name: { type: String , required: true },
     row: { type: [String] , required: true },
     tableRow: { type: [String] , required: true},
-    floor_id: [{ type: String , ref: 'floors' }],
+    floor_id: { type: String , ref: 'floors' },
 }, {
     timestamps: true
 });

@@ -15,14 +15,10 @@ exports.getselectZone = async (req, res) => {
     const allZone = await zoneSchema.find({});
     const { floorId } = req.params;
 
-    let zonesToReturn = [];
-
     if (!floorId || floorId === "all") {
       filterzone = allZone;
     } else {
-      filterzone = allZone.filter(
-        (z) => Array.isArray(z.floor_id) && z.floor_id.includes(floorId)
-      );
+      filterzone = allZone.filter((z) => z.floor_id === floorId);
     }
 
     // เรียงชื่อโซน A-Z
