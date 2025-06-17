@@ -1,4 +1,5 @@
 const zoneSchema = require('../models/zone.model');
+const seatSchema = require('../models/seat.model');
 const employeeSchema = require('../models/employee.model');
 
 exports.getselectzone = async (req, res) => {
@@ -107,12 +108,32 @@ exports.getonlineEmployees = async (req, res) => {
 
         const emponlineFiltered = emponline.filter(emp => emp.zone_id === zonedata._id);
 
+        const seatinzone = await seatSchema.find({ zone_id: zonedata._id }, 'tableNumber status -_id');
+
+        const seatsChangeStatus = seatinzone.map(seat => ({
+        employee_id: seat.employee_id,
+        tableNumber: seat.tableNumber,
+        status: seat.status === 'occupied' ? 'active' : 'inactive'
+        }));
+
+        const tataltable = seatsChangeStatus.length;
+        const tableActive = seatsChangeStatus.filter(seat => seat.status === 'inactive').length;
+        const tableInactive = seatsChangeStatus.filter(seat => seat.status === 'active').length;
+        const totalemp = emponlineFiltered.length;
+
+
         return res.status(200).json({
             success: true,
             data: emponlineFiltered.map(emp => ({
                 emp_id: emp.emp_id,
                 name: emp.firstname + ' ' + emp.lastname,
-            }))
+            })),
+            summary: {
+                totalOnlineEmp: totalemp,
+                totalTables: tataltable,
+                activeTables: tableActive,
+                inactiveTables: tableInactive
+            }
         });
     } catch {
         return res.status(500).json({ message: "Error fetching online employees", error });
