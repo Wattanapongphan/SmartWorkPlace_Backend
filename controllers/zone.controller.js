@@ -21,7 +21,6 @@ exports.getselectZone = async (req, res) => {
       filterzone = allZone.filter((z) => z.floor_id === floorId);
     }
 
-    // เรียงชื่อโซน A-Z
     filterzone.sort((a, b) =>
       a.name.localeCompare(b.name, "en", { sensitivity: "base" })
     );

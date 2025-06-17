@@ -4,7 +4,7 @@ const { getseatings, filter , gettable , updatetable , deletetable } = require('
 
 router.get('/', getseatings);
 router.get('/filter', filter);
-router.get('/table', gettable);
+// router.get('/table', gettable);
 
 
 // ใช้จริง
