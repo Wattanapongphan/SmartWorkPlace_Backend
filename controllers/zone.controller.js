@@ -8,9 +8,9 @@ exports.getselectzone = async (req, res) => {
         const { floor } = req.query;
 
         const sortByZoneName = (a, b) => {
-            if (a.name < b.name) return -1;
-            if (a.name > b.name) return 1;
-            return 0;
+            if (a.name < b.name) return -1; // อยู่ด้านหน้า
+            if (a.name > b.name) return 1;  // อยู่ด้านหลัง
+            return 0; 
         }
 
         if (!floor || floor === 'all') {
