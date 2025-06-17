@@ -248,7 +248,7 @@ exports.filter = async (req, res) => {
   }
 };
 
-exports.gettable = async (req, res) => {
+exports.gettable = async (req, res) => {  
   try {
     const { zoneName } = req.params;
 
@@ -328,7 +328,7 @@ exports.updatetable = async (req, res) => {
       return res.status(404).json({ message: 'Employee not found' });
     }
 
-    const data_emp_seat = await seatSchema.find({ emp_id });
+    const data_emp_seat = await seatSchema.find({ employee_id: emp_id });
     if (data_emp_seat.length > 0) {
       return res.status(400).json({ message: 'Employee already has a seat' });
     }
@@ -336,7 +336,7 @@ exports.updatetable = async (req, res) => {
     const updatedSeat = await seatSchema.findOneAndUpdate(
       { zone_id: zonedata._id ,tableNumber },
       {
-        emp_id,
+        employee_id: emp_id,
         status: 'active'
       },
       { new: true }

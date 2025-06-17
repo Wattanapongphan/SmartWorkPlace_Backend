@@ -259,7 +259,7 @@ await emplocationSchema.create([
     const positions = ['Developer', 'Manager', 'Analyst', 'Designer', 'Support'];
     const employees = [];
 
-  for (let i = 0; i <= 40; i++) {
+  for (let i = 0; i <= 50; i++) {
     const empId = `EMP${i}`;
     employees.push({
       _id: empId,
