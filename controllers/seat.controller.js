@@ -313,38 +313,6 @@ exports.gettable = async (req, res) => {
   }
 }
 
-exports.deletetable = async (req, res) => {
-  try {
-    const { zoneName , tableNumber } = req.params;
-
-    // from ZoneA to Zone A
-    const formattedZone = zoneName.replace(/([a-z])([A-Z])/g, '$1 $2');
-
-    // find zone._id use zonedata._id
-    const zonedata = await zoneSchema.findOne({ name: formattedZone });
-
-
-    const updatedSeat = await seatSchema.findOneAndUpdate(
-      { zone_id: zonedata._id ,tableNumber },
-      {
-        employee_id: null,
-        status: 'inactive'
-      },
-      { new: true }
-    ); 
-
-    if (!updatedSeat) {
-      return res.status(404).json({ message: 'Table not found or already inactive' });
-    }
-
-    return res.status(200).json({ message: 'Removed the employee from this seat Successfully', data: updatedSeat });
-
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Error deleting table', error });
-  }
-};
-
 exports.updatetable = async (req, res) => {
   try {
     const { zoneName, emp_id, tableNumber } = req.params;
@@ -369,7 +337,7 @@ exports.updatetable = async (req, res) => {
       { zone_id: zonedata._id ,tableNumber },
       {
         employee_id: emp_id,
-        status: 'active'
+        status: 'occupied'
       },
       { new: true }
     );
@@ -385,3 +353,36 @@ exports.updatetable = async (req, res) => {
     return res.status(500).json({ message: 'Error updating table', error });
   }
 };
+
+exports.deletetable = async (req, res) => {
+  try {
+    const { zoneName , tableNumber } = req.params;
+
+    // from ZoneA to Zone A
+    const formattedZone = zoneName.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+    // find zone._id use zonedata._id
+    const zonedata = await zoneSchema.findOne({ name: formattedZone });
+
+    const updatedSeat = await seatSchema.findOneAndUpdate(
+      { zone_id: zonedata._id ,tableNumber },
+      {
+        employee_id: null,
+        status: 'avaliable'
+      },
+      { new: true }
+    ); 
+
+    if (!updatedSeat) {
+      return res.status(404).json({ message: 'Table not found or already inactive' });
+    }
+
+    return res.status(200).json({ message: 'Removed the employee from this seat Successfully', data: updatedSeat });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error deleting table', error });
+  }
+};
+
+
