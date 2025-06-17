@@ -9,7 +9,7 @@ router.get('/filter', filter);
 
 // ใช้จริง
 router.get('/table/:zoneName', gettable);
-router.put('/table/:zoneName/:tableNumber/:emp_id', updatetable);
+router.put('/table/:zoneName/:tableNumber', updatetable);
 router.delete('/table/:zoneName/:tableNumber', deletetable);
 
 

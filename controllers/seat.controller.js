@@ -315,7 +315,8 @@ exports.gettable = async (req, res) => {
 
 exports.updatetable = async (req, res) => {
   try {
-    const { zoneName, emp_id, tableNumber } = req.params;
+    const { zoneName, tableNumber } = req.params;
+    const { employee_id } = req.body
 
     // from ZoneA to Zone A
     const formattedZone = zoneName.replace(/([a-z])([A-Z])/g, '$1 $2');
@@ -323,12 +324,12 @@ exports.updatetable = async (req, res) => {
     // find zone._id use zonedata._id
     const zonedata = await zoneSchema.findOne({ name: formattedZone });
 
-    const data_emp = await employeeSchema.findById(emp_id);
+    const data_emp = await employeeSchema.findById(employee_id);
     if (!data_emp) {
       return res.status(404).json({ message: 'Employee not found' });
     }
 
-    const data_emp_seat = await seatSchema.find({ employee_id: emp_id });
+    const data_emp_seat = await seatSchema.find({ employee_id });
     if (data_emp_seat.length > 0) {
       return res.status(400).json({ message: 'Employee already has a seat' });
     }
@@ -336,7 +337,7 @@ exports.updatetable = async (req, res) => {
     const updatedSeat = await seatSchema.findOneAndUpdate(
       { zone_id: zonedata._id ,tableNumber },
       {
-        employee_id: emp_id,
+        employee_id,
         status: 'occupied'
       },
       { new: true }
