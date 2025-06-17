@@ -16,14 +16,14 @@ exports.getselectzone = async (req, res) => {
         if (!floor || floor === 'all') {
             return res.status(200).json({
                 success: true,
-                data: allZones.sort(sortByZoneName).map(z => ({ name: z.name})),
+                data: allZones.sort(sortByZoneName).map(z => ({ name: z.name, code: z.floor_id[0] })),
             });
         } else {
             const filteredZones = allZones.filter(z => z.floor_id[0] === floor);
 
             return res.status(200).json({
                 success: true,
-                data: filteredZones.sort(sortByZoneName).map(z => ({ name: z.name }))
+                data: filteredZones.sort(sortByZoneName).map(z => ({ name: z.name , code: z.floor_id[0]  }))
             });
         }
     } catch (error) {
