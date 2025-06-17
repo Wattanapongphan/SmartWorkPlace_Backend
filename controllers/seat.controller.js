@@ -258,29 +258,54 @@ exports.gettable = async (req, res) => {
     // find zone._id use zonedata._id
     const zonedata = await zoneSchema.findOne({ name: formattedZone });
 
-    const seats = await seatSchema.find({ zone_id: zonedata._id }, 'employee_id tableNumber status -_id').populate('employee_id', 'firstname lastname department position phone');
-
-    const seatsChangeStatus = seats.map(seat => ({
-      employee: seat.employee_id?{
-        id : seat.employee_id._id,
-        firstname: seat.employee_id.firstname,
-        lastname: seat.employee_id.lastname,
-        department: seat.employee_id.department,
-        position: seat.employee_id.position,
-        phone: seat.employee_id.phone
-      }: null,
-      tableNumber: seat.tableNumber,
-      status: seat.status === 'occupied' ? 'active' : 'inactive'
-    }));
-
-    const totalable = seatsChangeStatus.length;
-    const tableActive = seatsChangeStatus.filter(seat => seat.status === 'inactive').length;
+    const result = await seatSchema.aggregate([
+      {
+        $match: { zone_id: zonedata._id }
+      },
+      {
+        $lookup: {
+          from: "employees",
+          localField: "employee_id",
+          foreignField: "_id",
+          as: "employee"
+        }
+      },
+      {
+        $unwind: { path: '$employee', preserveNullAndEmptyArrays: true }
+      },
+      {
+        $lookup:{
+          from: "images",
+          localField: "employee_id",
+          foreignField: "employee_id",
+          as: "employee_id.image"
+        }
+      },
+      {
+        $unwind: { path: '$employee_id.image', preserveNullAndEmptyArrays: true }
+      },
+      {
+        $project:{
+          tableNumber:1,
+          status: 1,
+          employee:{
+            employee_id: '$employee._id',
+            firstname: '$employee.firstname',
+            lastname: '$employee.lastname',
+            department: '$employee.department',
+            position: '$employee.position',
+            phone: '$employee.phone',
+            image:'$employee_id.image.url'
+          }
+        }
+      }
+    ])
 
   
     return res.status(200).json({
-      data: seatsChangeStatus,
-      tableActive: tableActive,
-      totalTable: totalable
+      data: result,
+      tableavailable: result.filter(r=>r.status === 'available').length,
+      totalTable: result.length
     })
 
   } catch (error) {
