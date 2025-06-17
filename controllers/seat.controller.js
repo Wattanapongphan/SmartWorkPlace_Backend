@@ -295,17 +295,17 @@ exports.deletetable = async (req, res) => {
     const updatedSeat = await seatSchema.findOneAndUpdate(
       { zone_id: zonedata._id ,tableNumber },
       {
-        emp_id: null,
+        employee_id: null,
         status: 'inactive'
       },
       { new: true }
-    );
+    ); 
 
     if (!updatedSeat) {
       return res.status(404).json({ message: 'Table not found or already inactive' });
     }
 
-    return res.status(200).json({ message: 'Successfully removed the employee from this seat', data: updatedSeat });
+    return res.status(200).json({ message: 'removed the employee from this seat Successfully', data: updatedSeat });
 
   } catch (error) {
     console.error(error);
