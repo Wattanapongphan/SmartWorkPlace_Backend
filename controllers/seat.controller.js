@@ -258,10 +258,17 @@ exports.gettable = async (req, res) => {
     // find zone._id use zonedata._id
     const zonedata = await zoneSchema.findOne({ name: formattedZone });
 
-    const seats = await seatSchema.find({ zone_id: zonedata._id }, 'emp_id tableNumber status -_id');
+    const seats = await seatSchema.find({ zone_id: zonedata._id }, 'employee_id tableNumber status -_id').populate('employee_id', 'firstname lastname department position phone');
 
     const seatsChangeStatus = seats.map(seat => ({
-      employee_id: seat.employee_id,
+      employee: seat.employee_id?{
+        id : seat.employee_id._id,
+        firstname: seat.employee_id.firstname,
+        lastname: seat.employee_id.lastname,
+        department: seat.employee_id.department,
+        position: seat.employee_id.position,
+        phone: seat.employee_id.phone
+      }: null,
       tableNumber: seat.tableNumber,
       status: seat.status === 'occupied' ? 'active' : 'inactive'
     }));
@@ -305,7 +312,7 @@ exports.deletetable = async (req, res) => {
       return res.status(404).json({ message: 'Table not found or already inactive' });
     }
 
-    return res.status(200).json({ message: 'removed the employee from this seat Successfully', data: updatedSeat });
+    return res.status(200).json({ message: 'Removed the employee from this seat Successfully', data: updatedSeat });
 
   } catch (error) {
     console.error(error);
