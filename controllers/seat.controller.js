@@ -315,13 +315,13 @@ exports.gettable = async (req, res) => {
 
 exports.updatetable = async (req, res) => {
   try {
-    const { zoneName, tableNumber } = req.params;
+    const { zoneName, tableNumber } = req.params;  
     const { employee_id } = req.body
 
     // from ZoneA to Zone A
     const formattedZone = zoneName.replace(/([a-z])([A-Z])/g, '$1 $2');
 
-    // find zone._id use zonedata._id
+    // find zone._id use zonedata._id 
     const zonedata = await zoneSchema.findOne({ name: formattedZone });
 
     const data_emp = await employeeSchema.findById(employee_id);
@@ -353,7 +353,7 @@ exports.updatetable = async (req, res) => {
     console.error(error);
     return res.status(500).json({ message: 'Error updating table', error });
   }
-};
+}; 
 
 exports.deletetable = async (req, res) => {
   try {
@@ -369,7 +369,7 @@ exports.deletetable = async (req, res) => {
       { zone_id: zonedata._id ,tableNumber },
       {
         employee_id: null,
-        status: 'avaliable'
+        status: 'available'
       },
       { new: true }
     ); 
@@ -385,5 +385,3 @@ exports.deletetable = async (req, res) => {
     return res.status(500).json({ message: 'Error deleting table', error });
   }
 };
-
-
