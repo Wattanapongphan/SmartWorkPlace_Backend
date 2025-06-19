@@ -15,6 +15,7 @@ var floorRouter = require('./routes/floor.js');
 var branchRouter = require('./routes/building.js');
 var employeeRouter = require('./routes/employee.js');
 var zoneRouter = require('./routes/zone.js');
+var authRouter = require('./routes/auth');
 
 
 var app = express();
@@ -39,6 +40,7 @@ app.use('/building', floorRouter);
 app.use('/branch', branchRouter);
 app.use('/employee', employeeRouter);
 app.use('/zone', zoneRouter);
+app.use('/auth', authRouter);
 
 
 // catch 404 and forward to error handler

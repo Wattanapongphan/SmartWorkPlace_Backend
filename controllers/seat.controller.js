@@ -257,6 +257,7 @@ exports.gettable = async (req, res) => {
 
     // find zone._id use zonedata._id
     const zonedata = await zoneSchema.findOne({ name: formattedZone });
+    console.log(zonedata._id)
 
     const result = await seatSchema.aggregate([
       {
@@ -300,7 +301,7 @@ exports.gettable = async (req, res) => {
         }
       }
     ])
-
+    console.log(result)
   
     return res.status(200).json({
       data: result,

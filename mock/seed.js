@@ -8,6 +8,7 @@ const imgSchema = require('../models/image.model');
 const attendanceSchema = require('../models/attendance.model');
 const emplocationSchema = require('../models/employeeLocation.model');
 const employeeSchema = require('../models/employee.model');
+const authSchema = require('../models/user.model');
 
 async function seed() {
     await mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`);
@@ -21,6 +22,12 @@ async function seed() {
     await attendanceSchema.deleteMany();
     await emplocationSchema.deleteMany();
     await employeeSchema.deleteMany();
+    await authSchema.deleteMany();
+
+    // mock auth data
+    await authSchema.create([
+        {username:'admin',password:'1234'}
+    ])
 
     // mock building data
     await buildingSchema.create([
