@@ -80,7 +80,7 @@ async function seed() {
         {_id: 'cnx-stp-3-A2' , name: 'Zone A2' , row: ['1', '2', '3'], tableRow: ['16', '32', '48'], floor_id: 'cnx-stp-3'},
         {_id: 'cnx-stp-3-A3' , name: 'Zone A3' , row: ['1', '2', '3', '4'], tableRow: ['16', '32', '48', '58'], floor_id: 'cnx-stp-3'},
         {_id: 'cnx-stp-3-A4' , name: 'Zone A4' , row: ['1', '2', '3'], tableRow: ['12', '26', '44'], floor_id: 'cnx-stp-3'},
-        {_id: 'cnx-stp-4-A0' , name: 'Zone A0' , row: ['1', '2'], tableRow: ['16', '28'], floor_id: 'cnx-stp-4'},
+        {_id: 'cnx-stp-4-A0' , name: 'Zone A5' , row: ['1', '2'], tableRow: ['16', '28'], floor_id: 'cnx-stp-4'},
     ])
 
     // mock seat data

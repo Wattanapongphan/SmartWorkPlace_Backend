@@ -257,7 +257,6 @@ exports.gettable = async (req, res) => {
 
     // find zone._id use zonedata._id
     const zonedata = await zoneSchema.findOne({ name: formattedZone });
-    console.log(zonedata._id)
 
     const result = await seatSchema.aggregate([
       {
@@ -279,11 +278,11 @@ exports.gettable = async (req, res) => {
           from: "images",
           localField: "employee_id",
           foreignField: "employee_id",
-          as: "employee_id.image"
+          as: "image"
         }
       },
       {
-        $unwind: { path: '$employee_id.image', preserveNullAndEmptyArrays: true }
+        $unwind: { path: '$image', preserveNullAndEmptyArrays: true }
       },
       {
         $project:{
@@ -296,7 +295,7 @@ exports.gettable = async (req, res) => {
             department: '$employee.department',
             position: '$employee.position',
             phone: '$employee.phone',
-            image:'$employee_id.image.url'
+            image:'$image.url'
           }
         }
       }
