@@ -21,7 +21,6 @@ exports.login = async(req, res) => {
     if(!isMatch){
         return res.status(401).json({
             message: "Invalid password",
-            error: error.message
         })
     }
     const token = createToken(user._id)
@@ -30,7 +29,7 @@ exports.login = async(req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
-        maxAge: 60* 60 * 1000 // 1 hour
+         maxAge: 60* 60 * 1000 // 1 hour
     });
 
     res.status(200).json({
