@@ -2,6 +2,8 @@ const seatSchema = require('../models/seat.model');
 const employeeSchema = require('../models/employee.model');
 const zoneSchema = require('../models/zone.model');
 const exceljs = require('exceljs');
+const PDFDocument = require('pdfkit');
+const getStream = require('get-stream');
 
 exports.exportJson = async (req, res) => {
     try {
@@ -67,10 +69,38 @@ exports.exportJson = async (req, res) => {
         res.setHeader('Content-Disposition', `attachment; filename=employeebyzone.xlsx`);
 
         await workbook.xlsx.write(res);
-        res.end();
+        return res.end();
         
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Error exporting data", error });
+        return res.status(500).json({ message: "Error exporting data", error });
     }
 }
+
+exports.exportJsonToPdf = async (req, res) => {
+  try {
+    const jsonData = req.body; // JSON ที่ส่งเข้ามา
+
+    const doc = new PDFDocument();
+    const stream = doc.pipe(res);
+
+    doc.fontSize(20).text('Report text', { align: 'center' });
+    doc.moveDown();
+
+    // วาดแต่ละ key:value จาก JSON
+    console.log('📄 Generating PDF with data:', jsonData);
+    Object.entries(jsonData).forEach(([key, value]) => {
+      doc.fontSize(12).text(`${key}: ${value}`);
+    });
+
+    doc.end();
+
+    console.log('📄 Generating PDF a:', jsonData);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename=report.pdf');
+  } catch (error) {
+    console.error('❌ Error generating PDF:', error);
+    return res.status(500).json({ message: 'Error generating PDF', error });
+  }
+};
+
