@@ -258,12 +258,14 @@ exports.gettable = async (req, res) => {
     // find zone._id use zonedata._id
     const zonedata = await zoneSchema.findOne({ name: formattedZone });
 
-    const seats = await seatSchema.find({ zone_id: zonedata._id }, 'emp_id tableNumber status -_id');
+    const seats = await seatSchema.find({ zone_id: zonedata._id }, 'employee_id tableNumber status -_id');
 
-    const seatsChangeStatus = seats.map(seat => ({
-      employee_id: seat.employee_id,
-      tableNumber: seat.tableNumber,
-      status: seat.status === 'occupied' ? 'active' : 'inactive'
+    console.log(seats);
+
+    const seatsChangeStatus = seats.map(seats => ({
+      tableNumber: seats.tableNumber,
+      employee_id: seats.employee_id,
+      status: seats.status === 'occupied' ? 'active' : 'inactive'
     }));
 
     const totalable = seatsChangeStatus.length;
