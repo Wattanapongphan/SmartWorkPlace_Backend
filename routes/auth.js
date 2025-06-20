@@ -13,6 +13,6 @@ router.post('/refresh-token', refreshToken);
 router.post('/logout', logout);
 // Protected route
 router.get('/protected', auth, protectedRoute);
-
+3
 // Export the router
 module.exports = router;

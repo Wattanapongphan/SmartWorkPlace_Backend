@@ -16,6 +16,7 @@ var branchRouter = require('./routes/building.js');
 var employeeRouter = require('./routes/employee.js');
 var ZoneRouter = require('./routes/zone.js');
 var authRouter = require('./routes/auth.js');
+var exportRouter = require('./routes/exportjson.js');
 
 var app = express();
 
@@ -42,6 +43,7 @@ app.use('/zone', ZoneRouter);
 
 //
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/export', exportRouter);
 
 
 // catch 404 and forward to error handler
