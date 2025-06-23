@@ -295,9 +295,9 @@ exports.deletetable = async (req, res) => {
 
 
     const updatedSeat = await seatSchema.findOneAndUpdate(
-      { zone_id: zonedata._id ,tableNumber },
+      { zone_id: zonedata._id, tableNumber },
       {
-        emp_id: null,
+        employee_id: null,
         status: 'inactive'
       },
       { new: true }
