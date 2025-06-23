@@ -7,6 +7,7 @@ var cors = require('cors');
 require('dotenv').config();
 // Connect to MongoDB
 require('./db.js');
+const ExcelJS = require('exceljs');
 
 var indexRouter = require('./routes/index');
 var seatRouter = require('./routes/seat.js');
@@ -16,9 +17,11 @@ var branchRouter = require('./routes/building.js');
 var employeeRouter = require('./routes/employee.js');
 var zoneRouter = require('./routes/zone.js');
 var authRouter = require('./routes/auth');
+var exportRouter = require('./routes/export.js');
 
 
 var app = express();
+
 
 //setup CORS
 app.use(cors())
@@ -32,6 +35,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+
 
 app.use('/', indexRouter);
 app.use('/seats', seatRouter);
@@ -41,6 +46,8 @@ app.use('/branch', branchRouter);
 app.use('/employee', employeeRouter);
 app.use('/zone', zoneRouter);
 app.use('/auth', authRouter);
+app.use('/export', exportRouter);
+
 
 
 // catch 404 and forward to error handler
