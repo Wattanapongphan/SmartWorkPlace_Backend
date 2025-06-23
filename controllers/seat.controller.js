@@ -298,7 +298,7 @@ exports.deletetable = async (req, res) => {
       { zone_id: zonedata._id, tableNumber },
       {
         employee_id: null,
-        status: 'inactive'
+        status: 'available'
       },
       { new: true }
     );
@@ -338,8 +338,8 @@ exports.updatetable = async (req, res) => {
     const updatedSeat = await seatSchema.findOneAndUpdate(
       { zone_id: zonedata._id ,tableNumber },
       {
-        emp_id,
-        status: 'active'
+        employee_id : emp_id,
+        status: 'occupied'
       },
       { new: true }
     );
