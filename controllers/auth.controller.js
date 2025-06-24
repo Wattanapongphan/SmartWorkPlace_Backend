@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
         // Generate access token
         const accessToken = jwt.sign({ id: user._id }, 'access-secret', { expiresIn: '15m' });
         // Generate refresh token
-        const refreshToken = jwt.sign({ id: user_id}, 'refresh-secret', { expiresIn: '7d' });
+        const refreshToken = jwt.sign({ id: user._id}, 'refresh-secret', { expiresIn: '7d' });
 
         // Save refresh token in database
         const newRefreshToken = new RefreshToken({
